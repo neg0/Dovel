@@ -1,0 +1,37 @@
+version: '2'
+services:
+  php:
+    image: plt-php:7.2
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    volumes:
+    - '../project:/usr/local/project:delegated'
+    networks:
+    - plt-coupon
+
+  nginx:
+    image: plt-nginx:1.5
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+    - '80:80'
+    - '443:443'
+    volumes:
+    - '../project:/usr/local/project:delegated'
+    networks:
+    - plt-coupon
+
+  mysql:
+    image: mysql:8.0.12
+    ports:
+    - '3308:3306'
+    env_file:
+    - .env
+    networks:
+    - plt-coupon
+
+networks:
+  plt-coupon:
+    driver: bridge
