@@ -1,19 +1,19 @@
 version: '2'
 services:
   php:
-    image: plt-php:7.2
-    container_name: plt_coupon_php
+    image: dovel-php:7.2
+    container_name: dovel_php
     build:
       context: .
       dockerfile: php/Dockerfile
     volumes:
-      - '../project:/usr/local/project'
+      - '../project:/usr/local/src'
     networks:
-      - plt-coupon
+      - dovel_network
 
   nginx:
-    image: plt-nginx:1.5
-    container_name: plt_coupon_nginx
+    image: dovel-nginx:1.5
+    container_name: dovel_nginx
     build:
       context: .
       dockerfile: nginx/Dockerfile
@@ -21,31 +21,33 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '../project:/usr/local/project'
+      - '../project:/usr/local/src'
     networks:
-      - plt-coupon
+      - dovel_network
 
   mysql:
     image: mysql:8.0.12
-    container_name: plt_coupon_mysql
+    container_name: dovel_mysql
     ports:
       - '3308:3306'
     env_file:
       - .env
     networks:
-      - plt-coupon
+      - dovel_network
 
   redis:
     image: redis:5.0.0
-    container_name: plt_coupon_redis
+    container_name: dovel_redis
     ports:
       - '6379:6379'
     volumes:
       - 'redis-data:/data'
+    networks:
+      - dovel_network
 
 volumes:
   redis-data:
 
 networks:
-  plt-coupon:
+  dovel_network:
     driver: bridge

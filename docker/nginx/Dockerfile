@@ -1,6 +1,6 @@
 FROM nginx:1.15
 
-LABEL maintainer = "Hadi T <hadi.tajallaei@prettylittlething.com"
+LABEL maintainer = "Hadi T"
 
 RUN echo "Setting up virtual host"
 COPY nginx/default.conf /etc/nginx/conf.d
