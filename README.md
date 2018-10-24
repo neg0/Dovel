@@ -18,23 +18,28 @@ __For Mac only:__
 $: docker-compose -f docker/docker-compose.mac.yml up --build
 ```
 
+__Activate Xdebug on Mac:__
+```bash
+$: sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
+```
+
 ### Access tty for each container
 
-_Enter PHP container:_
+<small>_Enter PHP container:_</small>
 ```bash
 $: docker-compose -f docker/docker-compose.yml exec php bash
 ```
 
-_Enter MySql container:_
+<small>_Enter MySql container:_</small>
 ```bash
 $: docker-compose -f docker/docker-compose.yml exec mysql bash
 ```
-_Enter Redis container:_
+<small>_Enter Redis container:_</small>
 ```bash
 $: docker-compose -f docker/docker-compose.yml exec redis bash
 ```
 
-_Enter NGINX container:_
+<small>_Enter NGINX container:_</small>
 ```bash
 $: docker-compose -f docker/docker-compose.yml exec nginx bash
 ```
